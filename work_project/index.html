@@ -6,6 +6,9 @@
 	<title>work file</title>
 	<style type="text/css">
 		.demo{ width:100px; height:100px; position:relative; border:#ddd solid 1px; }
+		.touch{ width:200px; height:50px; margin:10px; border-radius:20px;  background:#ddd; }
+		.touch i{ transition:all 0.5s ease; display:block; width:100px; height:50px; border-radius:20px; background:blue; }
+		.touch.act i{ transform:translateX(100px); background:#eee; }
 	</style>
 </head>
 <body>
@@ -17,9 +20,22 @@
 		<div></div>
 		<div></div>
 	</div>
+	<div class="touch">
+		<i></i>
+	</div>
 	<script type="text/javascript">
 		// Javascript Document
 		console.log('UA:	' + navigator.userAgent);
+		let touch = document.querySelector('.touch');
+		let flag = true;
+		touch.addEventListener('click',function(){
+			if(flag){
+				touch.className+=' act';
+			}else{
+				touch.className='touch';
+			}
+			flag = !flag;
+		},false);
 	</script>
 </body>
 </html>
