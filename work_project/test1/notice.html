@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>移动端页面基础结构</title>
     <style type="text/css">
-        html{ font-size:12px; }
         html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,textarea,input,span{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;}
         article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
         html{ font-size:100%; overflow-y:scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
@@ -21,6 +20,22 @@
         p.date{ font-size:14px; font-weight:bold; line-height:1.5; color:#47484a; }
         p.text{ font-size:14px; line-height:1.5; color:#47484a; }
         .img{ display:block; width:4rem; height:auto; margin:0 auto; }
+        /*
+            REM 单位计算
+            window.screen.width         设备宽度    (375)
+            window.devicePixelRatio     设置像素比  (2)
+
+            根元素font-size计算方法,将页面分为16份, 每份为1rem, 则屏幕宽度除以16.
+            window.scrren.width / 16 = （html font-size）
+            375 / 16 = 23.4375
+            
+            如果设计稿的宽度为750的话，那么是基于iphone6屏幕大小来进行开发
+
+            如果750设计稿中一个div的宽度为160px
+            对应计算rem的公式为：160 / (html font-size) / 设置像素比
+
+            160 / 23.4375 / 2 = 3.4133333333333336 = 3.41rem
+        */
     </style>
 </head>
 <body>
@@ -30,9 +45,9 @@
         <p class="date">奇点汽车微信积分商城 暂停访问</p>
         <p class="text">2018年9月17日21:00至24:00</p>
     </div>
-    <script>
-        alert(window.screen.width);
-    </script>
     <script src='flexible.js'></script>
+    <script>
+        // ...
+    </script>
 </body>
 </html>
