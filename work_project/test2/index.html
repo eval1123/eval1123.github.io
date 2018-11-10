@@ -15,6 +15,7 @@
 		let textarea = document.querySelector('.textarea');
 		let btn = document.querySelector('.btn');
 		btn.addEventListener('click', () => {
+			alert(textarea.select);
 			textarea.select();
 			document.execCommand('copy');
 		}, false);
