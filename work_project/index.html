@@ -9,6 +9,9 @@
 	<script type="text/javascript">
 		let ua = navigator.userAgent;
 		document.write(ua);
+                document.addEventListener('readystatechange', () => {
+			console.log(document.readyState);
+		});
 	</script>
 </body>
 </html>
