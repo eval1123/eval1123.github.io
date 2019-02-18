@@ -6,12 +6,23 @@
 	<title>work file</title>
 </head>
 <body>
+	<div>you already working for：<span class='work'></span></div>
+	<div>you already living for：<span class='live'></span> days</div>
 	<script type="text/javascript">
-		let ua = navigator.userAgent;
-		document.write(ua);
-                document.addEventListener('readystatechange', () => {
-			console.log(document.readyState);
-		});
+		function mathTime (val) {
+			let result = 0;
+			let num = 31536E6;
+			result = (new Date().getTime() - new Date(val).getTime()) / num;
+			return result;
+		}
+		let work = document.querySelector('.work');
+		let live = document.querySelector('.live');
+		setInterval(() => {
+			let work_time = mathTime('2012-11-01');
+			let live_time = mathTime('1993-11-27');
+			work.innerHTML = work_time;
+			live.innerHTML = live_time;
+		}, 1000);
 	</script>
 </body>
 </html>
