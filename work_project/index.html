@@ -9,6 +9,7 @@
 	<div>you already working for：<span class='work'></span> years</div>
 	<div>you already living for：<span class='live'></span> days</div>
 	<script type="text/javascript">
+		// 定义计算时间函数
 		function mathTime (val) {
 			let result = 0;
 			let num = 31536E6;
@@ -17,15 +18,13 @@
 		}
 		let work = document.querySelector('.work');
 		let live = document.querySelector('.live');
+		// 每0.1秒走一次计算
 		setInterval(() => {
 			let work_time = mathTime('2012-11-01');
 			let live_time = mathTime('1993-11-27');
 			work.innerHTML = work_time;
 			live.innerHTML = live_time;
-		}, 1000);
-		window.addEventListener('focus', () => {
-			location.reload();
-		});
+		}, 100);
 	</script>
 </body>
 </html>
