@@ -23,6 +23,9 @@
 			work.innerHTML = work_time;
 			live.innerHTML = live_time;
 		}, 1000);
+		window.addEventListener('focus', () => {
+			location.reload();
+		});
 	</script>
 </body>
 </html>
