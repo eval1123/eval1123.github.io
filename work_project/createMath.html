@@ -21,7 +21,7 @@
         // 生成随机码
         function createCode(){
             // 随机数的位数
-            let len = 18;
+            let len = 15;
             // 定义取值范围
             let getArr = [];
             // 取 0 - 9
@@ -33,7 +33,7 @@
             for (let i = 0; i < len; i++ ) {
                 // 随机值
                 let random = Math.random() * getArr.length >> 0;
-                val+=getArr[random];
+                val+='PSI' + getArr[random];
             }
             record.push(val);
             return val;
