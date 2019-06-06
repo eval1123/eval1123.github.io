@@ -33,8 +33,9 @@
             for (let i = 0; i < len; i++ ) {
                 // 随机值
                 let random = Math.random() * getArr.length >> 0;
-                val+='PSI' + getArr[random];
+                val+=getArr[random];
             }
+            val = 'PSI' + val;
             record.push(val);
             return val;
         };
