@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{ padding:10px; }
+        div{ margin:10px 0; }
+    </style>
+</head>
+<body>
+    <button class="btn">生成随机18位码</button>
+    <div class="showVal"></div>
+    <script>
+        let btn = document.querySelector('.btn');
+        let showVal = document.querySelector('.showVal');
+        // 记录每次生成的随机数.
+        let record = [];
+        // 生成随机码
+        function createCode(){
+            // 随机数的位数
+            let len = 18;
+            // 定义取值范围
+            let getArr = [];
+            // 取 0 - 9
+            for(let i=0;i<10;i++){ getArr.push(i); }
+            // 取 A - Z
+            for(let i=0;i<26;i++){ getArr.push(String.fromCharCode(65 + i)); }
+            // 存储生成的值
+            let val = '';
+            for (let i = 0; i < len; i++ ) {
+                // 随机值
+                let random = Math.random() * getArr.length >> 0;
+                val+=getArr[random];
+            }
+            record.push(val);
+            return val;
+        };
+        let temp = '';
+        btn.addEventListener('click', () => {
+            temp = createCode();
+            showVal.innerHTML = temp;
+        });
+    </script>
+</body>
+</html>
