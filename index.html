@@ -7,6 +7,20 @@
 </head>
 <body>
 	Hello, Welcome to my Home!
-	<a href='mailto:1912315894@qq.com'>跳转邮箱</a>
+	<audio src="src/audio.mp3" id="audio"></audio>
+    <script src="src/jweixin-1.0.0.js"></script>
+    <script>
+        let audio = document.querySelector('#audio');
+        wx.config({
+            appId: '',
+            timestamp: '',
+            nonceStr: '',
+            signature: '',
+            jsApiList: ['']
+        });
+        wx.ready(() => {
+            audio.play();
+        });
+    </script>
 </body>
 </html>
