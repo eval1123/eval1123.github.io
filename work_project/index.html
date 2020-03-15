@@ -27,6 +27,12 @@
 			work.innerHTML = work_time;
 			live.innerHTML = live_time;
 		}, 100);
+		document.addEventListener('readystatechange', () => {
+			if (document.readyState === 'complete') {
+				console.log('to paly');
+				audio.play();
+			}
+		})
 	</script>
 </body>
 </html>
