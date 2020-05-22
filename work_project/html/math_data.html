@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>倒计时</title>
+	<style type="text/css">
+		*{ margin:0; padding:0; font-size:12px; }
+		input[type='text']{ width:200px; height:30px; margin:10px; }
+		input[type='button']{ width:100px; height:30px; }
+		.msg{ margin:10px; font-size:16px; line-height:1.5; }
+	</style>
+</head>
+<body>
+	<input type="text" class="text" placeholder="请输入倒计时的时间或分钟数" />
+	<input type="button" class="btn" value="计算倒计时" />
+	<div class="msg"></div>
+	<script type="text/javascript">
+		function two_len(str){
+			str = str.toString();
+			return str.length > 1 ? str : "0" + str;
+		};
+		let text = document.querySelector(".text");
+		let btn = document.querySelector(".btn");
+		let msg = document.querySelector(".msg");
+		let timer = null;
+		let dateReg = /(^\d{4}\-\d{1,2}\-\d{1,2}(\s\d{1,2}\:\d{1,2}\:\d{1,2})?$)|(^[1-9]{1}\d*$)/;
+		let numReg = /^\d+$/;
+		btn.addEventListener("click",function(e){
+			if(!dateReg.test(text.value)){
+				alert('日期格式不正确！');
+				return;
+			}else{
+				clearInterval(timer);
+				let d,h,m,s,ms;
+				let now = new Date().getTime();
+				let t_val = text.value;
+				let val = numReg.test(t_val) ? parseInt((t_val * 1000 * 60) + now) : t_val;
+				let set_date = new Date(val).getTime();
+				var date_fn = function(){
+					let t = two_len;
+					let date = new Date(val).getTime() - new Date().getTime();
+					if(date <= 20){
+						console.log('倒计时已到！');
+						clearInterval(timer);
+						return;
+					}
+					// 当毫秒数小于100左右时, js计算会有问题.
+					date = date <= 100 ? 0 : date;
+					d = parseInt(date / 86400000);
+					date%=86400000;
+					h = parseInt(date / 3600000);
+					date%=3600000;
+					m = parseInt(date / 60000);
+					date%=60000;
+					s = parseInt(date / 1000);
+					date%=1000;
+					ms = parseInt(date / 10);
+					msg.innerHTML = `${d}天${t(h)}时${t(m)}分${t(s)}秒${t(ms)}`;
+				}
+				date_fn();
+				timer = setInterval(date_fn,10);
+			}
+		},false);
+	</script>
+</body>
+</html>

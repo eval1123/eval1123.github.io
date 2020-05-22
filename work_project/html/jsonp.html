@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>原生态方式实现jsonp跨域</title>
+</head>
+<body>
+<input type="text" class="text" value="1220563" />
+<input type="button" value="button" class="btn" />
+<script type="text/javascript">
+    var text = document.querySelector(".text");
+    var btn = document.querySelector(".btn");
+    var json = null;
+    btn.addEventListener("click",function(){
+        if(text.value == ""){
+            alert('没有id号');
+            return;
+        }else{
+            var newScript = document.createElement("script");
+            newScript.src = "https://api.douban.com/v2/book/"+ text.value +"?callback=callbackFn";
+            document.body.appendChild(newScript);
+            newScript.addEventListener("load",function(){
+                alert("已获取到其他域数据:   "+JSON.stringify(json));
+                console.log(json.image);
+                document.body.removeChild(newScript);
+            },false);
+            newScript.addEventListener("error",function(){
+                document.body.removeChild(newScript);
+            },false);
+        }
+    });
+    function callbackFn(){ json = arguments[0]; }
+    callbackFn();
+</script>
+</body>
+</html>
