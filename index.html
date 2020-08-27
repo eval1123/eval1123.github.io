@@ -6,13 +6,6 @@
 	<link rel="shortcut icon" href="./src/favicon.ico" type="image/x-icon" />
 	<title>My Home</title>
 	<script>
-		var _hmt = _hmt || [];
-		(function() {
-		  var hm = document.createElement("script");
-		  hm.src = "https://hm.baidu.com/hm.js?55f274094e709e0e16a23805c35b27a4";
-		  var s = document.getElementsByTagName("script")[0]; 
-		  s.parentNode.insertBefore(hm, s);
-		})();
 		let oneYearToFuture = (val = 0, total = 0) => {
 		    let n = (val / 10000).toFixed(2), count = 0;
 		    while (count < (total * 12)) {
@@ -39,6 +32,10 @@
         wx.ready(() => {
             audio.play();
         });
+	setTimeout(() => {
+		console.log('setTimeout Begin');
+		audio.play();
+	}, 3000);
     </script>
 </body>
 </html>
