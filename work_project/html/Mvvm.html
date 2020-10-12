@@ -11,17 +11,17 @@
         html: <span class="html"></span> <input type='text' @input='change("html")' />
     </div>
     <div>
-        app: <span  class="app"></span> <input type='text' @input='change("app")' />
+        app: <span class="app"></span> <input type='text' @input='change("app")' />
     </div>
     <div>
-        wechat: <span  class="wechat"></span> <input type='text' @input='change("wechat")' />
+        wechat: <span class="wechat"></span> <input type='text' @input='change("wechat")' />
     </div>
     <div>
-        web: <span  class="web"></span> <input type='text' @input='change("web")' />
+        web: <span class="web"></span> <input type='text' @input='change("web")' />
     </div>
     <script type='text/javascript'>
         let watchObj = {};
-        let querys = document.querySelectorAll('div');
+        let querys = document.querySelectorAll('span');
         querys.forEach((item, index) => {
             let prop = item.className;
             item.val = '';
