@@ -7,10 +7,18 @@
     <title>通过Object.defineProperty实现简单版MVVM双向数据绑定实例</title>
 </head>
 <body>
-    <div class="html"></div>
-    <div class="app"></div>
-    <div class="wechat"></div>
-    <div class="web"></div>
+    <div>
+        html: <span class="html"></span> <input type='text' @input='change("html")' />
+    </div>
+    <div>
+        app: <span  class="app"></span> <input type='text' @input='change("app")' />
+    </div>
+    <div>
+        wechat: <span  class="wechat"></span> <input type='text' @input='change("wechat")' />
+    </div>
+    <div>
+        web: <span  class="web"></span> <input type='text' @input='change("web")' />
+    </div>
     <script type='text/javascript'>
         let watchObj = {};
         let querys = document.querySelectorAll('div');
@@ -27,6 +35,9 @@
                 }
             });
         });
+        let change = (val) => {
+            watchObj[obj] = e.target.value;
+        };
     </script>
 </body>
 </html>
