@@ -8,16 +8,23 @@
 </head>
 <body>
     <div>
-        html: <span class="html"></span> <input type='text' @input='change("html")' />
+        html: <span class="html"></span>
+        <div><input type='text' /></div>
     </div>
+    <br>
     <div>
-        app: <span class="app"></span> <input type='text' @input='change("app")' />
+        app: <span class="app"></span>
+        <div><input type='text' /></div>
     </div>
+    <br>
     <div>
-        wechat: <span class="wechat"></span> <input type='text' @input='change("wechat")' />
+        wechat: <span class="wechat"></span>
+        <div><input type='text' /></div>
     </div>
+    <br>
     <div>
-        web: <span class="web"></span> <input type='text' @input='change("web")' />
+        web: <span class="web"></span>
+        <div><input type='text' /></div>
     </div>
     <script type='text/javascript'>
         let watchObj = {};
@@ -35,9 +42,14 @@
                 }
             });
         });
-        let change = (val) => {
-            watchObj[val] = e.target.value;
+        let change = () => {
+            let val = event.target.parentNode.previousElementSibling.className;
+            watchObj[val] = event.target.value;
         };
+        let input = document.querySelectorAll('input');
+        input.forEach(item => {
+            item.addEventListener('input', change);
+        });
     </script>
 </body>
 </html>
