@@ -31,25 +31,35 @@
         </div>
     </div>
     <script type='text/javascript'>
-        function toggleTab(){  };
-        toggleTab.prototype.init = function(param){
-            if(!arguments.length){ return; }
+        function toggleTab (options) { 
+            this.options = options || {};
+            this.init(this.options);
+         };
+        toggleTab.prototype.init = function () {
+            let param = this.options;
+            if(!Object.keys(param).length){ return; }
             let title = document.querySelectorAll(param.title);
             let cont = document.querySelectorAll(param.cont);
-            for(let i=0;i<title.length;i++){
-                if(i == 0){
+            for(let i = 0; i < title.length; i++){
+                if (i == 0) {
                     title[i].className = param.active;
                     cont[i].className = param.active;
                 }
-                title[i].addEventListener(param.type || 'click',function(){
-                    for(let j=0;j<title.length;j++){ title[j].className=''; cont[j].className=''; }
+                title[i].addEventListener(param.type || 'click', () => {
+                    for(let j = 0; j < title.length; j++){
+                        title[j].className = '';
+                        cont[j].className = '';
+                    }
                     title[i].className = param.active;
                     cont[i].className = param.active;
                 },false);
             }
         };
-        var tab  = new toggleTab();
-        tab.init({ title : '.title li' , cont : ".cont div" , active : 'active' });
+        new toggleTab({
+            title : '.title li' ,
+            cont : ".cont div" ,
+            active : 'active'
+        });
     </script>
 </body>
 </html>
