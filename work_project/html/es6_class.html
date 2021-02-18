@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Parent {
+            // 构造函数
+            constructor (options) {
+                this.options = options || {};
+            }
+
+            // 实例属性
+            a = 123;
+
+            // 实例方法
+            sayHello () {
+                return 'hello ' + this.options.name;
+            }
+
+            // 静态属性
+            static version = 1.0;
+
+            // 静态方法
+            static sayStatic () {
+                return 'static';
+            }
+        };
+
+        let a = new Parent();
+        console.log(a);
+    </script>
+</body>
+</html>
