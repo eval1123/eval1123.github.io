@@ -27,6 +27,7 @@
                 this._proxyData(this.$data);
 
                 // 2. 调用observer监听data中所有属性的变化.
+                new Observer(this.$data);
 
                 // 3. 调用compiler解析指令与差值表达式.
 
@@ -51,16 +52,31 @@
 
         // 数据劫持.
         class Observer {
-            constructor () {
-
+            constructor (data) {
+                this.walk(data);
             }
 
-            walk () {
-
+            walk (data) {
+                if (typeof(data) !== 'object') {
+                    return;
+                }
+                Object.keys(data).forEach(key => {
+                    this.defineReactive(data, key, data[key]);
+                });
             }
 
-            defineReactive () {
-                
+            defineReactive (data, key, val) {
+                Object.defineProperty(data, key, {
+                    enumerable: true,
+                    configurable: true,
+                    get () {
+                        return val;
+                    },
+                    set (val) {
+                        if (val === data[key]) { return; }
+                        data[key] = val;
+                    }
+                });
             }
         };
 
