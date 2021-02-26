@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+        <span>{{ count }}</span>
+        <p v-if='false'>这是一个段落</p>
+        <p v-show='false'>这是另一个段落</p>
+        <input type="text" v-model='message' />
+    </div>
+    <script>
+        // 实现一个小版本的Vue核心代码.
+        class Vue {
+            constructor (options) {
+                // 接收初始化参数.
+                this.$options = options || {};
+                this.$data = options.data || {};
+                this.$el = typeof(options.el) === 'string' ? document.querySelector(options.el) : options.el;
+
+                // 1. 把data属性注入到Vue实例中, 并生成getter和setter, 方便后续使用, 如: vm.message.
+                this._proxyData(this.$data);
+
+                // 2. 调用observer监听data中所有属性的变化.
+
+                // 3. 调用compiler解析指令与差值表达式.
+
+            }
+
+            _proxyData (data) {
+                Object.keys(data).forEach(key => {
+                    Object.defineProperty(this, key, {
+                        enumerable: true,
+                        configurable: true,
+                        get () {
+                            return data[key];
+                        },
+                        set (val) {
+                            if (val === data[key]) { return; };
+                            data[key] = val;
+                        }
+                    });
+                });
+            }
+        };
+
+        // 数据劫持.
+        class Observer {
+            constructor () {
+
+            }
+
+            walk () {
+
+            }
+
+            defineReactive () {
+                
+            }
+        };
+
+        // 解析指令.
+        class Compiler {
+
+        };
+
+        // 发布者.
+        class Dep {
+
+        };
+
+        // 观察者.
+        class Watcher {
+
+        };
+
+        // 实例化对象
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'this is a message',
+                count: 10
+            },
+            methods: {
+                // 
+            }
+        });
+    </script>
+</body>
+</html>
