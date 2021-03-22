@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 自定义Promise
+
+        /*
+            Promise功能拆分.
+
+            1. promise对象的实例具有链式调用的特性.
+            2. catch方法具有异常穿透能力.
+
+        */
+
+        class _Promise {
+
+            constructor (excutor) {
+                // excutor执行器函数, 同步执行.
+                this.status = 'pending';
+                this.data = undefined;
+                this.callbacks = [];
+            }
+
+            // 用于指定成功或失败的回调, 返回一个新的promise对象.
+            then (onResolved, onRejected) {
+                // 
+            }
+
+            // 用于指定失败的回调, 返回一个新的promise对象.
+            catch (onRejected) {
+                // 
+            }
+
+            // 定义_Promise的静态方法.
+
+            static resolve (value) {
+                // 
+            }
+
+            static reject (reason) {
+                // 
+            }
+
+            static race (promises) {
+                // 
+            }
+
+            static all (promises) {
+                // 
+            }
+        };
+    </script>
+</body>
+</html>
