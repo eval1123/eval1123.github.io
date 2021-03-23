@@ -14,7 +14,7 @@
             2. 可以传入个数不同的实参.
         */
         function add () {
-            let args = Array.from(arguments);
+            let args = [].slice.call(arguments, 0);
             let inner = (...rest) => {
                 args.push(...rest);
                 return inner;
