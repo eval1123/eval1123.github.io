@@ -59,7 +59,6 @@
             let result = source.push ? [] : {};
             for (let i in source) {
                 if (typeof(source[i]) === 'object') {
-                    result[i] = source[i].push ? [] : {};
                     result[i] = deepCopy(source[i]);
                 } else {
                     result[i] = source[i];
