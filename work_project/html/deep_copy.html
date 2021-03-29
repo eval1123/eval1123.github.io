@@ -52,23 +52,20 @@
                 }
             }
         };
-        let result = {};
-        function deepCopy (obj, result) {
-            if (typeof(obj) !== 'object') {
-                return obj;
+        function deepCopy (source) {
+            if (typeof(source) !== 'object') {
+                return source;
             }
-            for (let i in obj) {
-                if (typeof(obj[i]) === 'object') {
-                    if (obj[i].push) {
-                        result[i] = [];
-                    } else {
-                        result[i] = {};
-                    }
-                    deepCopy(obj[i], result[i]);
+            let result = source.push ? [] : {};
+            for (let i in source) {
+                if (typeof(source[i]) === 'object') {
+                    result[i] = source[i].push ? [] : {};
+                    result[i] = deepCopy(source[i]);
                 } else {
-                    result[i] = obj[i];
+                    result[i] = source[i];
                 }
             }
+            return result;
         };
     </script>
 </body>
