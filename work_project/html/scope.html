@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            this与作用域.
+
+            执行栈: 用于存储执行上下文的地方, 是一个先进后出的队列, 执行上下文栈顶的上下文又叫做当前执行上下文.
+
+            在ES6的版本下, 有4种情况会创建新的执行上下文:
+
+                1. 进入全局代码.
+
+                2. 进入function函数体.
+
+                3. 进入eval函数参数指定的代码.
+
+                4. 进入module代码.
+
+            全局执行上下文的文本环境:
+
+                1. var 和 function 声明的创建在全局对象中, let const class 声明的创建在全局scope中.
+
+                2. 查找是先到scope全局中查找, 再到全局对象中查找.
+
+        */
+        console.log('abc');
+    </script>
+</body>
+</html>
