@@ -7,8 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-
+    <script>        
         // 自定义Promise
 
         /*
@@ -19,18 +18,88 @@
 
         */
 
+        // 定义常量.
+        const PENDING = 'pending';
+        const RESOLVED = 'resolved';
+        const REJECTED = 'rejected';
+
+        // Promise类
         class _Promise {
 
+            // 构造函数
             constructor (excutor) {
-                // excutor执行器函数, 同步执行.
-                this.status = 'pending';
+
+                // 定义初始化值.
+                let that = this;
+                this.status = PENDING;
                 this.data = undefined;
                 this.callbacks = [];
+
+                // 定义resolve函数, 主要功能是改状态, 传值, 执行回调.
+                function resolve (value) {
+                    // 如果当前状态不是pending.
+                    if (that.status !== PENDING) {
+                        return;
+                    }
+                    // 设置状态.
+                    that.status = RESOLVED;
+                    // 设置data.
+                    that.data = value;
+                    // 执行回调.
+                    that.callbacks.forEach(item => {
+                        item.onResolved();
+                    });
+                };
+
+                // 定义reject函数, 主要功能是改状态, 传值, 执行回调.
+                function reject (reason) {
+                    // 如果当前状态不是pending.
+                    if (that.status !== PENDING) {
+                        return;
+                    }
+                    // 设置状态.
+                    that.status = REJECTED;
+                    // 设置data.
+                    that.data = reason;
+                    // 执行回调.
+                    that.callbacks.forEach(item => {
+                        item.onRejected();
+                    });
+                };
+
+                // excutor执行器函数, 同步执行.
+                try {
+                    excutor(resolve, reject);
+                } catch (err) {
+                    reject(err);
+                };
+
             }
 
             // 用于指定成功或失败的回调, 返回一个新的promise对象.
             then (onResolved, onRejected) {
-                // 
+                let that = this;
+                return new _Promise((resolve, reject) => {
+                    if (that.status === PENDING) {
+                        that.callbacks.push({
+                            onResolved,
+                            onRejected
+                        });
+                    } else if (that.status === RESOLVED) {
+                        try {
+                            let result = onResolved(that.data);
+                            if (result instanceof _Promise) {
+                                // 
+                            } else {
+                                resolve(result);
+                            }
+                        } catch (err) {
+                            reject(err);
+                        }
+                    } else {
+                        onRejected(that.data);
+                    }
+                });
             }
 
             // 用于指定失败的回调, 返回一个新的promise对象.
