@@ -80,24 +80,39 @@
             then (onResolved, onRejected) {
                 let that = this;
                 return new _Promise((resolve, reject) => {
-                    if (that.status === PENDING) {
-                        that.callbacks.push({
-                            onResolved,
-                            onRejected
-                        });
-                    } else if (that.status === RESOLVED) {
+                    function fn (callback) {
+                        /*
+                            1. onResolved执行抛出异常, 返回reject.
+                            2. onResolved没有返回值, 返回resolved.
+                            3. onResolved返回promise, 根据promse返回结果确定返回值.
+                        */
                         try {
-                            let result = onResolved(that.data);
+                            let result = callback(that.data);
                             if (result instanceof _Promise) {
-                                // 
+                                result.then(resolve, reject);
                             } else {
                                 resolve(result);
                             }
                         } catch (err) {
                             reject(err);
                         }
+                    }
+                    // 判断状态为pending, resolved, rejected.
+                    if (that.status === RESOLVED) {
+                        // 异步执行回调.
+                        setTimeout(() => {
+                            fn(onResolved);
+                        });
+                    } else if (that.status === REJECTED) {
+                        // 异步执行回调.
+                        setTimeout(() => {
+                            fn(onRejected);
+                        });
                     } else {
-                        onRejected(that.data);
+                        that.callbacks.push({
+                            onResolved,
+                            onRejected
+                        });
                     }
                 });
             }
@@ -110,19 +125,47 @@
             // 定义_Promise的静态方法.
 
             static resolve (value) {
-                // 
+                return new _Promise((resolve, reject) => {
+                    if (value instanceof _Promise) {
+                        value.then(resolve, reject);
+                    } else {
+                        resolve(value);
+                    }
+                });
             }
 
             static reject (reason) {
-                // 
+                return new _Promise((resolve, reject) => {
+                    reject(reason);
+                });
             }
 
             static race (promises) {
-                // 
+                return new _Promise((resolve, reject) => {
+                    promises.forEach(item => {
+                        item.then(value => {
+                            resolve(value);
+                        },reason => {
+                            reject(reason);
+                        });
+                    });
+                });
             }
 
             static all (promises) {
-                // 
+                return new _Promise((resolve, reject) => {
+                    let arr = [];
+                    promises.forEach((item, index) => {
+                        item.then(value => {
+                            arr[index] = value;
+                            if (arr.filter(item => item).length >= promises.length) {
+                                resolve(arr);
+                            }
+                        }, reason => {
+                            reject(reason);
+                        });
+                    });
+                });
             }
         };
     </script>

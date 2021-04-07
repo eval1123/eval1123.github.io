@@ -9,12 +9,20 @@
 <body>
     <script>
         /*
+        
+            async await:
 
-            async await: .
+                async是一个异步函数返回的是一个promise, await后面跟的一个表达式.
 
-            111.
-            
+                async函数内可以没有await关键字, 但await关键字只能在async函数中使用, 单独使用await会报错.
+
         */
+
+        async function fn () {
+            let result = await Promise.resolve(4);
+            return result;
+        }
+        fn();
     </script>
 </body>
 </html>
