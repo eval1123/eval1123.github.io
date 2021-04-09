@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+
+            instanceof 功能的实现, 用于判断一个实例是否属于某个构造函数.
+
+            实现思路：
+
+                1. 判断实例的隐式原型是否在构造函数的原型链上.
+
+                2. 判断实例的隐式原型还没有找到顶级NULL时, 就继续找下去.
+
+                3. 判断实例隐式原型是否等于构造函数原型, 如果不是将实例再赋值给它本身的隐式原型.
+
+                4. 通过再往上一级进入查找, 直到找到为止.
+                
+        */
+
+        function _instanceof (example, constructor) {
+            let result = false;
+            while (example.__proto__ !== null) {
+                if (example.__proto__ === constructor.prototype) {
+                    result = true;
+                    break;
+                } else {
+                    example = example.__proto__;
+                }
+            }
+            return result;
+        };
+        let date = new Date();
+        let reg = /\w/;
+        let num = 1;
+        let str = '123';
+        let arr = [];
+        let fn = function () {};
+        console.log(_instanceof(date, Object), date instanceof Object);
+        console.log(_instanceof(reg, Object), reg instanceof Object);
+        console.log(_instanceof(num, Object), num instanceof Object);
+        console.log(_instanceof(str, Object), str instanceof Object);
+        console.log(_instanceof(arr, Object), arr instanceof Object);
+        console.log(_instanceof(arr, String), arr instanceof String);
+        console.log(_instanceof(fn, Function), fn instanceof Function);
+    </script>
+</body>
+</html>
