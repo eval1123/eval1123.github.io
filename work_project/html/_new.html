@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            new 运算符背后方法的实现: 
+
+                1. 创建一个空对象.
+
+                2. 改变this指向.
+
+                3. 设置隐式原型指向构造函数的原型链.
+                
+        */
+        function _new (constructor, ...args) {
+            let result = {};
+            let val = constructor.call(result, ...args);
+            result.__proto__ = constructor.prototype;
+            return typeof val === 'object' ? val : result;
+        };
+    </script>
+</body>
+</html>

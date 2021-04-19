@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+
+            列转换:
+
+                字符组: [A ~ Z], [AA ~ AZ], [BA ~ BZ]...
+                数值组: [0-25],  [26-51],   [52-77]...
+
+                根据以上两组数据形成映射关系, 输入任意数值或字符串, 找出映射关系.
+
+                例如: 
+
+                    0 -> A, 26 -> AA.
+
+                    AB -> 27
+
+            实现思路:
+
+                1. 
+
+        */
+        function NumToStr (num) {
+            let result = '';
+            let create = String.fromCharCode;
+            let len = num / 26 << 0;
+            let yu = num % 26;
+            if (len) {
+                result += create(64 + len);
+            }
+            result += create(65 + yu);
+            return result;
+        };
+    </script>
+</body>
+</html>

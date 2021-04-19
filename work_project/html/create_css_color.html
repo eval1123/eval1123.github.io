@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            生成16进制css颜色值.
+        */
+        function createCss () {
+            let result = '#';
+            let arr = [];
+            for (let i = 0; i < 16; i++) {
+                if (i < 10) {
+                    arr.push(String.fromCharCode(48 + i));
+                } else {
+                    arr.push(String.fromCharCode(87 + i));
+                }
+            }
+            for (let j = 0; j < 6; j++) {
+                let random = Math.random() * 16 << 0;
+                result+=arr[random];
+            }
+            return result;
+        };
+    </script>
+</body>
+</html>

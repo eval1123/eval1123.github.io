@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+
+            call: 改变函数this指向, 参数值一代表改变this的值.
+
+            apply: 同样改变this指向, 参数形式和call有所不同, 参数一代表改变this的值, 后续参数统一放在一个数组中.
+
+            bind: 使用上和call相同, 不同的是它不会执行, 而是返回一个新的函数, 需要用闭包的形式来使用.
+
+        */
+        
+        // 自定义call方法.
+        Function.prototype._call = function (ctx, ...args) {
+            let name = Symbol();
+            // 将函数实例挂载到传入的this上.
+            ctx[name] = this;
+            // 将this上的函数执行, 并传入指定参数
+            ctx[name](...args);
+            // 执行完成后, 删除挂载的函数.
+            delete ctx[name];
+        };
+
+        // 自定义apply方法.
+        Function.prototype._apply = function (ctx, args = []) {
+            let name = Symbol();
+            // 将函数实例挂载到传入的this上.
+            ctx[name] = this;
+            // 将this上的函数执行, 并传入指定参数.
+            ctx[name](...args);
+            // 执行完成后, 删除挂载的函数.
+            delete ctx[name];
+        };
+
+        // 自定义bind方法.
+        Function.prototype._bind = function (ctx, ...args) {
+            return (innerArgs) => {
+                let name = Symbol();
+                ctx[name] = this;
+                ctx[name](...args.concat(innerArgs));
+                delete ctx[name];
+            };
+        };
+    </script>
+</body>
+</html>
