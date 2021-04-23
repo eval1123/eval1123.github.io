@@ -24,6 +24,29 @@
             result.__proto__ = constructor.prototype;
             return typeof val === 'object' ? val : result;
         };
+
+        function _new2 (constructor, ...args) {
+            let result = Object.create(constructor.prototype);
+            let type = constructor.call(result, ...args);
+            return typeof(type) === 'object' ? type : result;
+        };
+
+        function A (name, age) {
+            this.name = name;
+            this.age = age;
+        };
+
+        A.prototype.say = function () {
+            return this.name + ':' + this.age;
+        };
+
+        const a1 = new A('joseph', 21);
+        const a2 = _new(A, 'ice', 20);
+        const a3 = _new2(A, 'lemon', 19);
+
+        console.log('a1', a1);
+        console.log('a2', a2);
+        console.log('a3', a3);
     </script>
 </body>
 </html>
