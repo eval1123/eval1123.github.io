@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body { display: flex; }
+        body > div { flex: 1; }
+        div { box-sizing: content-box; width: 100px; height: 100px; padding: 30px; }
+        .a { background: red; }
+        .b { background: yellow; }
+        .c { background: blue; }
+        .d { background: green; }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="a">
+            <div class="b">
+                <div class="c">
+                    <div class="d"></div>
+                </div>
+            </div>
+        </div>
+        <button id="btn1">实现嵌套反转</button>
+    </div>
+    <div>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <button id="btn2">实现列表反转</button>
+    </div>
+    <script>
+        let btn1 = document.querySelector('#btn1');
+        btn1.addEventListener('click', () => {
+            // 实现dom反转
+            let divs = document.querySelectorAll('div');
+            let arr = [];
+            divs.forEach(item => { arr.push(item.className); });
+            arr.reverse();
+            divs.forEach((item, index) => { item.className = arr[index]; });
+        });
+        let btn2 = document.querySelector('#btn2');
+        btn2.addEventListener('click', () => {
+            let fragment = document.createDocumentFragment();
+            let ul = document.querySelector('ul');
+            let li = ul.querySelectorAll('li');
+            for (let i = li.length - 1; i >= 0; i--) {
+                let newLi = document.createElement('li');
+                newLi.innerHTML = li[i].innerHTML;
+                fragment.append(newLi);
+            }
+            ul.innerHTML = '';
+            ul.appendChild(fragment);
+            console.log(fragment);
+        });
+    </script>
+</body>
+</html>
