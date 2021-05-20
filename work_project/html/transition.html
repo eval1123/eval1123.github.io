@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            css3: transition过渡属性.
+
+        */
+        div, input {
+            width: 100px;
+            height: 100px;
+            border: #ddd solid 1px;
+            margin: 20px;
+            font-size: 14px;
+            line-height: 100px;
+            text-align: center;
+        }
+        div:nth-child(1) {
+            transition: width 1s ease;
+        }
+        div:nth-child(1):hover {
+            width: 200px;
+        }
+        div:nth-child(2) {
+            transition: width 1s ease;
+        }
+        div:nth-child(2):active {
+            width: 200px;
+        }
+        input {
+            outline: none;
+            transition: width 1s ease;
+        }
+        input:focus {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div>hover时触发</div>
+    <div>active时触发</div>
+    <input value="focus时触发" />
+</body>
+</html>
