@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function dataURLtoFile(dataURL, filename) {
+            let arr = dataURL.split(',');
+            let mime = arr[0].match(/:(.*?);/)[1];
+            let bstr = atob(arr[1]);
+            let n = bstr.length;
+            let u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new File([u8arr], `${filename}.jpg`, { type: mime });
+        }
+        let img = dataURLtoFile('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABkElEQVRoQ+2YQU7DMBBFvyGchg1nKQsWIAH3QKJI3AOQyoIFPQsbTtMUozQJMpAm45lfuQZ32drj/+aPZ9I4ZP5xmetHAUjtYHGgOGDMQCkhYwLN2/+nA/7y9Ng9vb6b0xcE0MaMdmB1NbuFw40DLqqH5QsDor6enXlgAY/7o8flXUzMKIBO/Lw7oGZAfIkHqk1cj3kMhBigsbg+8G/oD2opTBC/xHcxqw93Ii1RMcBGbW81AYIVKwqABcES3+iJBrBCMMWrAbQQbPEmgFiIXYg3A0ghdiWeAjAF0bZ2LJjtNxx0qks8NCm3ZHndrT0M9phmx8+zaQAjToRnUsXTSuibwnbYPQMIs94sWTvgnPX81J9JdSBwIU+ALfcgjxLK+hKP9fm9b6OSISVZM9SaJd+ZLnGMsJi1EuHmLqQRpNkzBaNywCLEsncIJhqAIYARQ1VCzINZscQO/Ik/9Vm/VulrLusXWz2E9jXgWEvUxhTfgal+nOr3ApAq86o5kFosZRLvG0S5A6kdKQ4UB4wZ+ARSY0pAAtoGUgAAAABJRU5ErkJggg==', 'a');
+        console.log('img', img);
+    </script>
+</body>
+</html>
