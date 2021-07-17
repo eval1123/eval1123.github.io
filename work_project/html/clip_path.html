@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            margin: 30px;
+            line-height: 200px;
+            text-align: center;
+            background: #333;
+            color: #fff;
+        }
+        .div1 {
+            /*
+                clip-path:
+
+                    使用裁剪方式创建元素的可显示区域, 区域内部分显示, 区域外隐藏.
+
+            */
+            clip-path: polygon(0 0, 100% 0, 100% 20%, 100% 190px, 180px 100%, 0 100%, 0% 80%, 0% 20%);
+        }
+        .div2 {
+            clip-path: polygon(20px 0, 100% 0, 100% 100%, 80% 100%, 0 99%, 0% 80%, 0 10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">实现一个右下斜切角</div>
+    <div class="div2">实现一个左上斜切角</div>
+</body>
+</html>
