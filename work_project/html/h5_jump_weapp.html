@@ -5,24 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        button {
-        margin: 10px auto;
-        width: 100px;
-        height: 50px;
-        background: #ccc!important;
-        border: #ddd solid 1px!important;
-    }
-    </style>
 </head>
 <body>
     <wx-open-launch-weapp
             id="launch-btn"
             username="gh_d2f1f395fc19"
             path="/pages/index/index.html">
-        <template>
-            <button class="btn">打开驾校一点通小程序</button>
-        </template>
+        <script type="text/wxtag-template">
+      <style>
+        .btn {
+        margin: 10px auto;
+        width: 100px;
+        height: 50px;
+        background: #ccc!important;
+        border: #ddd solid 1px!important;
+    }
+      </style>
+      <button class="btn">打开驾校一点通小程序</button>
+    </script>
     </wx-open-launch-weapp>
     <script type="text/javascript" src="//j1.58cdn.com.cn/dist/jledt/comm/zepto.js"></script>
     <script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
