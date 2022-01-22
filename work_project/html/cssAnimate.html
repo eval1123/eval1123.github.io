@@ -42,7 +42,7 @@
         .dance span {
             width: 10px;
             height: 30px;
-            margin: 0 10px;
+            margin: 0 5px;
             background: #CB2103;
             display: inline-block;
             animation-name: dance;
@@ -61,11 +61,40 @@
         .dance span:nth-child(3) {
             animation-delay: 0.9s;
         }
+        .bird {
+            margin: 30px;
+        }
+        .bird .top {
+            width: 0;
+            height: 0;
+            border: transparent 30px solid;
+            border-width: 30px 15px 30px 15px;
+            border-bottom-color: blue;
+        }
+        .bird .left {
+            position: relative;
+        }
+        .bird .left div:nth-child(1) {
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-left: 30px solid #c0a9e0;
+            border-bottom: 30px solid transparent;
+        }
+        .bird .left div:nth-child(2) {
+            position: absolute;
+            left: 30px;
+            top: 0;
+            height: 30px;
+            border-left: 30px solid #8567f0;
+            border-bottom: 10px solid transparent;
+        }
     </style>
 </head>
 <body>
     <div class="btns">
         <button>三竖线跳动</button>
+        <button>会飞的小鸟</button>
     </div>
     <div class="content">
         <div class="box">
@@ -75,12 +104,29 @@
                 <span></span>
             </div>
         </div>
+        <div class="box">
+            <div class="bird">
+                <div class="top"></div>
+                <div class="body">
+                    <div class="left">
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="right">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="tail"></div>
+            </div>
+        </div>
     </div>
     <script>
         let button = document.querySelector('.btns').querySelectorAll('button');
         let box = document.querySelector('.content').querySelectorAll('.box');
         button.forEach((item, index) => {
             item.addEventListener('click', () => {
+                box.forEach(item => item.className = 'box');
                 box[index].className += ' block';
             });
         });
