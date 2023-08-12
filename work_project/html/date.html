@@ -61,6 +61,33 @@
 				timer = setInterval(date_fn,10);
 			}
 		},false);
+
+		/*
+			公共时间方法定义
+		*/
+		
+		// 定义两位整数
+		function formatNumber (n) {
+			const str = n.toString();
+			return str[1] ? str : `0${str}`;
+		}
+
+		// 系统时间格式化
+		function formatTime () {
+			let date = new Date();
+			const year = date.getFullYear();
+			const month = date.getMonth() + 1;
+			const day = date.getDate();
+
+			const hour = date.getHours();
+			const minute = date.getMinutes();
+			const second = date.getSeconds();
+
+			const t1 = [year, month, day].map(formatNumber).join('-');
+			const t2 = [hour, minute, second].map(formatNumber).join(':');
+
+			return `${t1} ${t2}`;
+		}
 	</script>
 </body>
 </html>

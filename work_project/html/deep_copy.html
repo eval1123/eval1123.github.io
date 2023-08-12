@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            数据类型:
+
+                1. 简单数据类型和复杂数据类型存储方式不同.
+
+                2. 简单数据类型(值类型)是存储在栈中: string, number, boolean, null, undefined, symbol.
+
+                3. 复杂数据类型(引用类型)是存储在堆中: object, array, date, regexp, function.
+
+            浅拷贝:
+
+                1. 在对值类型进行浅拷贝时, 可以实现拷贝功能.
+
+                2. 在对引用类型进行浅拷贝时, 它拷贝的是堆中的引用地址, 即两个变量指向同一个引用地址.
+
+            深拷贝: 
+
+                1. JSON.parse(JSON.stringify(target)), 这种方式最简单, 它可以实现多级拷贝, 但它无法复制function和undefined值.
+
+                2. Object.assign(target, source), 但多层时, 只实现了浅拷贝, 即修改源对象, 会影响到现有对象.
+
+                3. 使用递规实现多层深拷贝.
+
+        */
+        let obj = {
+            a: 1,
+            b: '2',
+            c: true,
+            d: [1,2,3,4,5],
+            e: function () {
+                return 123;
+            },
+            f: {
+                g: '1',
+                h: 2,
+                i: [1],
+                j: undefined,
+                k: {
+                    l: 1,
+                    m: '2',
+                    n: [1]
+                }
+            }
+        };
+        function deepCopy (source) {
+            if (typeof(source) !== 'object') {
+                return source;
+            }
+            let result = source.push ? [] : {};
+            for (let i in source) {
+                if (typeof(source[i]) === 'object') {
+                    result[i] = deepCopy(source[i]);
+                } else {
+                    result[i] = source[i];
+                }
+            }
+            return result;
+        };
+    </script>
+</body>
+</html>

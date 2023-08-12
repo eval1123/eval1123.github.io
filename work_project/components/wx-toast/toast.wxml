@@ -1,0 +1,8 @@
+<view class='toast-out' wx:if='{{isShow}}'>
+    <view class='toast-in'>
+        <!-- <span class='iconfont {{iconClass}}'></span> -->
+        <view class='toast-txt'>
+            {{Text}}
+        </view>
+    </view>
+</view>

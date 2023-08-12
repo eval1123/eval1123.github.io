@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        
+            async await:
+
+                async是一个异步函数返回的是一个promise, await后面跟的一个表达式.
+
+                async函数内可以没有await关键字, 但await关键字只能在async函数中使用, 单独使用await会报错.
+
+        */
+
+        async function fn () {
+            let result = await Promise.resolve(4);
+            return result;
+        }
+        fn();
+    </script>
+</body>
+</html>

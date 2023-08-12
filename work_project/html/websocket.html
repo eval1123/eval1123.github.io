@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+
+            webSocket(长链接): 
+            
+                基于TCP的一种新的协议, 它实现了浏览器与服务器之间全双工通信.
+
+                全双工是指, 客户端给服务器发送信息, 同时允许服务器主动给客户端发送信息.
+
+                webSocket是一种持久协议, http是非持久协议.
+
+            Http通信: 
+
+                webSocket前使用http来做通信, 它是基于(请求 -> 响应)模式的.
+
+                如果要做到客户端和服务器端保持通信, 仅能通过Ajax轮询方式, 每次建立与服务器之间的连接都会有三次握手的过程.
+
+                使用Ajax轮询, 即A方发送一条消息到服务器, B方以指定的时间去从服务器上获取最新的消息.
+
+        */
+
+        // 创建webSocket连接
+        let ws = new WebSocket('ws://localhost:3000');
+
+        // 连接成功事件.
+        ws.addEventListener('open', () => {
+            console.log('连接成功');
+        });
+
+        // 向服务器发送信息
+        document.addEventListener('click', () => {
+            ws.send('hello');
+        });
+
+        // 接收ws服务器信息
+        ws.addEventListener('message', (e) => {
+            let data = e.data;
+            console.log(data);
+        });
+    </script>
+</body>
+</html>

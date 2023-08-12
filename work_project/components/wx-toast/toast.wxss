@@ -1,0 +1,27 @@
+.toast-out {
+  position: fixed;
+  bottom: 100rpx;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s ease;
+}
+.toast-out .toast-in {
+  min-width: 100px;
+  background: rgba(0, 0, 0, 0.7);
+  margin: 0;
+  padding: 6px;
+  text-align: center;
+  color: white;
+  border-radius: 8px;
+}
+.toast-out .toast-in span {
+  font-size: 30px;
+}
+.toast-out .toast-in .toast-txt {
+  font-size: 14px;
+  line-height: 2.6;
+}

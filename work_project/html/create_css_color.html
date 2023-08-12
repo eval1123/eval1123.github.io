@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            生成16进制css颜色值.
+        */
+        function createCss () {
+            let result = '#';
+            let str = '0123456789ABCDEF';
+            for (let i = 0; i < 6; i++) {
+                let random = Math.random() * str.length << 0;
+                result+=str[random];
+            }
+            return result;
+        };
+    </script>
+</body>
+</html>

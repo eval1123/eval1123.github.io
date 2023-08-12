@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 用于测试此远端文件是否会堵塞主进程, 每次需要重新清除缓存 -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <style>
+        .main { width: 300px; margin: 0 auto; }
+        .main img { display: block; width: 300px; height: 300px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <img src="" data-src="https://t7.baidu.com/it/u=2604797219,1573897854&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2942499027,2479446682&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=3165657288,4248157545&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=3240224891,3518615655&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2501476447,3743798074&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2610975262,3538281461&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=3734967019,941734598&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=71977564,2288086088&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2120291633,1902073212&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1126218742,3382842115&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2860139544,3309382475&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2067359777,945248471&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2026213499,1298949101&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=821791764,3584359573&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2198071245,1147596249&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2568080980,1605356548&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2313088765,3674092825&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1871347157,3677968557&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1811223786,2017754440&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=856855150,2968242962&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1260031315,3069314804&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1670896745,1253501498&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=3701983996,3589466049&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=4138158235,3956816634&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=3934835039,2975828388&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=3369781155,2244191219&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1004676687,1624880864&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2735082444,1184196936&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2062880158,288260424&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1559338618,2670021674&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=676040090,2830601796&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1926711830,1782061238&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2271636767,3442297225&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=4154886126,4132475961&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=853384970,3524943502&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=260205896,218106217&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1209438640,599698900&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2786606911,3567257194&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2689697732,1803792290&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=3277725887,2863221551&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1414079973,2538091923&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=1251794717,708081364&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=3456342631,3385797977&fm=193&f=GIF" alt="" />
+        <img src="" data-src="https://t7.baidu.com/it/u=2107304161,2091757993&fm=193&f=GIF" alt="" />
+    </div>
+    <script>
+        /*
+            懒加载(延迟加载): 指在页面中延迟加载图像, 是一种资源优化的方式.
+
+            初始化时, 只显示首屏中的部分图片.
+
+            其他图片, 当它们到了可视区之后再做显示.
+
+        */
+        
+        let imgs = document.querySelector('.main').querySelectorAll('img');     // 图片集.
+        let Top = document.documentElement.scrollTop;                           // 滚动值.
+        let height = document.documentElement.clientHeight;                     // 可视区的高度.
+
+        // 初始化在可视区的图片
+        imgs.forEach(item => {
+            if (item.offsetTop <= height) {
+                item.src = item.getAttribute('data-src');
+            } 
+        });
+        // 滚动页面时, 同时设置节流.
+        let flag = true;
+        document.addEventListener('scroll', (e) => {
+            if (!flag) { return; }
+            Top = document.documentElement.scrollTop;
+            flag = false;
+            imgs.forEach(item => {
+                if (item.offsetTop <= height + Top) {
+                    item.src = item.getAttribute('data-src');
+                } 
+            });
+            setTimeout(() => { flag = true; }, 200);
+        });
+    </script>
+</body>
+</html>

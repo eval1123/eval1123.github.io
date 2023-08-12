@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+        <span>{{ count }}</span>
+        <p>这是一个空白段落</p>
+        <p v-if='false'>这是一个段落</p>
+        <p v-show='false'>这是另一个段落</p>
+        <input type="text" v-model='message' />
+    </div>
+    <script>
+        // 实现一个小版本的Vue核心代码.
+        class Vue {
+            constructor (options) {
+                // 接收初始化参数.
+                this.$options = options || {};
+                this.$data = options.data || {};
+                this.$el = typeof(options.el) === 'string' ? document.querySelector(options.el) : options.el;
+
+                // 1. 把data属性注入到Vue实例中, 并生成getter和setter, 方便后续使用, 如: vm.message.
+                this._proxyData(this.$data);
+
+                // 2. 调用observer监听data中所有属性的变化.
+                new Observer(this.$data);
+
+                // 3. 调用compiler解析指令与差值表达式.
+                new Compiler(this);
+
+            }
+
+            _proxyData (data) {
+                Object.keys(data).forEach(key => {
+                    Object.defineProperty(this, key, {
+                        enumerable: true,
+                        configurable: true,
+                        get () {
+                            return data[key];
+                        },
+                        set (val) {
+                            if (val === data[key]) { return; };
+                            data[key] = val;
+                        }
+                    });
+                });
+            }
+        };
+
+        // 数据劫持.
+        class Observer {
+            constructor (data) {
+                this.walk(data);
+            }
+
+            walk (data) {
+                if (typeof(data) !== 'object') {
+                    return;
+                }
+                Object.keys(data).forEach(key => {
+                    this.defineReactive(data, key, data[key]);
+                });
+            }
+
+            defineReactive (data, key, val) {
+                let that = this;
+
+                // 收集依赖, 并发送通知.
+                let dep = new Dep();
+
+                // 如果val是对象的话, 同样需要转换为getter和setter.
+                this.walk(val);
+
+                Object.defineProperty(data, key, {
+                    enumerable: true,
+                    configurable: true,
+                    get () {
+                        // 收集依赖.
+                        Dep.target && dep.addSubs(Dep.target);
+
+                        return val;
+                        // 此处只能返回val, 而不可用data[key], 返回data[key]会导致再去触发get方法, 从而形成了一个死递归调用.
+                    },
+                    set (newVal) {
+                        if (newVal === val) { return; }
+                        val = newVal;
+                        that.walk(newVal);
+
+                        // 发送通知.
+                        dep.notify();
+                    }
+                });
+            }
+        };
+
+        // 解析指令.
+        class Compiler {
+            constructor (vm) {
+                this.el = vm.$el;
+                this.vm = vm;
+                // 调用compile
+                this.compile(this.el);
+            }
+
+            compile (el) {
+                el.childNodes.forEach(node => {
+                    // 如果当前元素有子元素, 则遍历子元素, 执行compile.
+                    if (node.childNodes && node.childNodes.length) {
+                        this.compile(node);
+                    }
+                    if (this.isElementNode(node)) {
+                        // 处理元素节点.
+                        this.compileElement(node);
+                    } else if (this.isTextNode(node)) {
+                        // 处理文本节点.
+                        this.compileText(node);
+                    }
+                });
+            }
+
+            // 解析元素节点, 处理指令.
+            compileElement (node) {
+
+                // 获取到元素的所有属性, 是一个伪数组对象.
+                let attrs = node.attributes;
+
+                // 遍历所有属性.
+                Array.from(attrs).forEach(attr => {
+
+                    let name = attr.name;
+                    let value = attr.value;
+
+                    // 获取到以v-开头的属性, 即是否是指令.
+                    if (this.isDirective(name)) {
+
+                        // 截取自v-后字符.
+                        name = name.substr(2);
+
+                        // 调用指令相关方法.
+                        this.update(node, name, value);
+                    }
+                });
+            }
+
+            // 用于执行指令方法.
+            update (node, name, value) {
+                let FnName = name + 'Update';
+                this[FnName] && this[FnName](node, value);
+            }
+
+            // 处理v-if指令方法.
+            ifUpdate (node, value) {
+                if (value.indexOf('false') > -1) {
+                    node.parentNode.removeChild(node);
+                }
+            }
+
+            // 处理v-show指令方法.
+            showUpdate (node, value) {
+                if (value.indexOf('false') > -1) {
+                    node.style.display = 'none';
+                }
+            }
+
+            // 处理v-model指令方法.
+            modelUpdate (node, value) {
+                node.value = this.vm[value];
+                node.addEventListener('input', (e) => {
+                    this.vm[value] = e.target.value;
+                });
+            }
+
+            // 解析文本节点, 处理差值表达式.
+            compileText (text) {
+                // 定义正则, 匹配差值表达式.
+                let reg = /\{\{(.+?)\}\}/;
+                let val = text.nodeValue;
+                if (reg.test(val)) {
+                    let name = RegExp.$1.trim();
+                    text.nodeValue = this.vm[name];
+                    
+                    new Watcher(this.vm, name, (newValue) => {
+                        text.nodeValue = newValue;
+                    });
+                }
+            }
+
+            // 判断是否为指令.  
+            isDirective (name) {
+                return name.startsWith('v-');
+            }
+
+            // 判断是否为元素节点.
+            isElementNode (node) {
+                return node.nodeType === 1;
+            }
+
+            // 判断是否为文本节点.
+            isTextNode (node) {
+                return node.nodeType === 3;
+            }
+        };
+
+        // 发布者.
+        class Dep {
+            constructor () {
+                // subs是存储所有的观察者.
+                this.subs = [];
+            }
+
+            // 添加观察者.
+            addSubs (sub) {
+                if (sub && sub.update) {
+                    this.subs.push(sub);
+                }
+            }
+
+            // 发送通知.
+            notify () {
+                this.subs.forEach(sub => {
+                    sub.update();
+                });
+            }
+        };
+
+        // 观察者.
+        class Watcher {
+            constructor (vm, key, cb) {
+                this.vm = vm;
+                this.key = key;
+                this.cb = cb;
+
+                Dep.target = this;
+
+                this.oldValue = vm[key];
+
+                Dep.target = null;
+            }
+
+            update () {
+                let newValue = this.vm[this.key];
+                if (newValue == this.oldValue) {
+                    return;
+                }
+                this.cb(newValue);
+            }
+        };
+
+        // 实例化对象
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'this is a message',
+                count: 10,
+                child: {
+                    name: 'shaw',
+                    sex: 'girl'
+                }
+            },
+            methods: {
+                // 
+            }
+        });
+        // vm.message = { name: 'joseph' };
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            const 定义常量:
+
+                定义值类型的是存储在栈内存中, 值是不允修改的.
+
+                定义引用类型的是以指针的形式存储在堆内存中, 原理上是只要不改变堆中的指针指向, 就不会报错.
+
+        */
+
+        //    const a = 1;
+        //    a = 2;    // 报错, 值类型不允许改变.
+
+        // const b = { name: '123' };
+        // b.name = 456;
+        // console.log(b);     // 此时是允许改变的, 这里改变的只是b中的属性, 而b本身保存在堆内存中指针并未改变.
+
+        // 如果做到引用类型也不允许修改, 可以添加数据劫持.
+        // 数据劫持使用writable不允许对象下面的属性被更改, 但可以向它内部添加和删除其他属性.
+        const c = { name: 'joseph', age: 25 };
+        for (let i in c) {
+            Object.defineProperty(c, i, {
+                configurable: false,
+                writable: false
+            });
+        };
+        console.log(c);
+    </script>
+</body>
+</html>

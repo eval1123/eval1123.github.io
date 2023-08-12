@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            js cookie:
+
+                存储cookie是浏览器提供的功能(是存储在硬盘中而非内存).
+
+                cookie会在向服务器发起请求时, 被携带并发送到服务器上.
+
+                限制:
+                
+                    单个域cookie的数量不得超过50个.
+                    
+                    每个cookie大小不得超过4KB.
+
+                访问:
+
+                    子域可以读取父域的cookie.
+
+                    父域不可以读取子域的cookie.
+
+                navigator.cookieEnabled可以设置不向服务器发送cookie, 客户端也不接受cookie.
+
+                设置httpOnly为true时, 则无法通过js去访问这个cookie.
+
+        */
+       // 设置cookie和过期时间, 如不设置过期时间, 默认为会话结束.
+       document.cookie = `name=joseph; expires=${new Date('2021-10-1')}`;
+       console.log(document.cookie);
+    </script>
+</body>
+</html>

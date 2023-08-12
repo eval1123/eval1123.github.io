@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .top {
+            position: fixed;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background: rgb(51, 170, 240);
+        }
+    </style>
+</head>
+<body>
+    <div class="top"></div>
+    <p>
+        1111<br />2222<br />3333<br />44444<br /><br />
+    </p>
+    <p>
+        5555<br />6666<br />7777<br />8888<br /><br />
+    </p>
+    <p>
+        99999<br />101010<br />111111<br />121212<br />
+    </p>
+    <p>
+        141414<br />151515<br />161616<br />171717<br />
+    </p>
+    <p>
+        1111<br />2222<br />3333<br />44444<br /><br />
+    </p>
+    <p>
+        5555<br />6666<br />7777<br />8888<br /><br />
+    </p>
+    <p>
+        99999<br />101010<br />111111<br />121212<br />
+    </p>
+    <p>
+        141414<br />151515<br />161616<br />171717<br />
+    </p>
+    <p>
+        1111<br />2222<br />3333<br />44444<br /><br />
+    </p>
+    <p>
+        5555<br />6666<br />7777<br />8888<br /><br />
+    </p>
+    <p>
+        99999<br />101010<br />111111<br />121212<br />
+    </p>
+    <p>
+        141414<br />151515<br />161616<br />171717<br />
+    </p>
+    <script>
+        let topEl = document.querySelector('.top');
+        window.addEventListener('scroll', (ev) => {
+            let scrollHeight = document.body.scrollHeight;
+            let scrollTop = document.documentElement.scrollTop;
+            let height = document.body.clientHeight;
+            topEl.style.width = scrollTop / (scrollHeight - height) * 100 + '%';
+            console.log(scrollTop, scrollHeight, height);
+        });
+    </script>
+</body>
+</html>

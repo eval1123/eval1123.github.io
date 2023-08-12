@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      div{
+        width: 200px;
+        height: 80px;
+        text-align: center;
+        line-height: 80px;
+        margin: 100px auto;
+        color: #fff
+      }
+      /*
+        知识点：
+        linear-gradient 每加一个为累加一层
+        
+        background-size: 
+        单角一层不用
+        双角 50% 100%; 
+        三角 50% 50%; （切角宽度 transparent 0）
+        全角 50% 50%;
+      */
+      .corner-cut1 {
+        background: rgb(201, 125, 26); /*compatibility*/
+        background: linear-gradient(-45deg, transparent 30px 15px, rgb(201, 125, 26) 0);
+      }
+      .corner-cut-all {
+        background: rgb(201, 125, 26); /*compatibility*/
+        background:
+        linear-gradient(135deg, transparent 15px, rgb(201, 125, 26) 0) top left,
+        linear-gradient(225deg, transparent 15px, rgb(201, 125, 26) 0) top right,
+        linear-gradient(45deg, transparent 15px, rgb(201, 125, 26) 0) bottom left,
+        linear-gradient(-45deg, transparent 15px, rgb(201, 125, 26) 0) bottom right;
+        /* transparent 15px 越大切角越大 */
+        /* 四切角 关系为90deg */
+        /* 切角读书以上下边为起点 默认90deg */
+        background-size: 50% 50%; /* 类设置图片尺寸 使每一渐变层只占元素的1/2 从而不覆盖transparent的角度 */
+        background-repeat: no-repeat;
+      }
+      .out-rect {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 300px;
+        height: 60px;
+        padding: 4px;
+        background: linear-gradient(-45deg, transparent 10px, #333 0) bottom right,
+                    linear-gradient(0deg, transparent 0px, #333 0) bottom left,
+                    linear-gradient(135deg, transparent 10px, #333 0) top left,
+                    linear-gradient(0deg, transparent 0px, #333 0) top right;
+        background-size: 50% 50%;
+        background-repeat: no-repeat;
+      }
+      .in-rect {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-45deg, transparent 8px, #ecebe2 0) bottom right,
+                    linear-gradient(0deg, transparent 0px, #ecebe2 0) bottom left,
+                    linear-gradient(135deg, transparent 8px, #ecebe2 0) top left,
+                    linear-gradient(0deg, transparent 0px, #ecebe2 0) top right;
+        background-size: 50% 50%;
+        background-repeat: no-repeat;
+      }
+      .cut2 {
+        width: 200px;
+        height: 45px;
+        background: linear-gradient(-45deg, transparent 24px, #5bdcfa 0) right,
+                    linear-gradient(135deg, transparent 12px, #5bdcfa 0) left;
+        background-size: 50% 100%;
+        background-repeat: no-repeat;
+      }
+</style>
+</head>
+<body>
+    <div class="corner-cut1">切角</div>
+    <div class="corner-cut-all">全切角</div>
+    <div class="out-rect">
+      <div class="in-rect"></div>
+   </div>
+   <div class="cut2"></div>
+</body>
+</html>

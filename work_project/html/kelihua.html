@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 实现函数柯里化
+        /*
+            1. 可以接收多个参数的函数.
+            2. 可以传入个数不同的实参.
+        */
+        function add () {
+            let args = [].slice.call(arguments, 0);
+            let inner = (...rest) => {
+                args.push(...rest);
+                return inner;
+            };
+            // 触发inner的隐式转换.
+            inner.toString = function () {
+                return args.reduce((a, b) => a + b);
+            };
+            return inner;
+        };
+    </script>
+</body>
+</html>

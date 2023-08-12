@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script lang="ts">
+        // 数据
+        const data = {
+            customerNoMore: false,
+            customerPageNum: 1,
+            customerParams: {},
+            customerData: [],
+        };
+        // 初始化加载, 下拉刷新, 搜索加载, 筛选搜索
+        getCustomer('init');
+        // 触底加载
+        getCustomer('add');
+        // 获取列表数据
+        const getCustomer = (type:any) => {
+            // 如无更多数据, 不加载任何数据.
+            if (type != 'add') {
+                data.customerNoMore = false
+                data.customerPageNum = 1
+            }
+            if (data.customerNoMore) {
+                return
+            }
+            uni.showLoading({
+                title: '加载中',
+                mask: true
+            });
+            data.isLoading = true;
+            if (type == 'add') {
+                data.customerPageNum++;
+            }
+            // 获取数据接口
+            getList({
+                pageNum: data.customerPageNum,
+                pageSize: 10,
+                taskType: 1,
+                ...data.customerParams,
+            }).then((res:any) => {
+                uni.hideLoading();
+                data.isLoading = false;
+                let { rows } = res.data
+                // 如不足10条数据时, 显示无更多数据
+                if (rows.length < 10) {
+                    data.customerNoMore = true
+                }
+                if (type == 'add') {
+                    data.customerData.push(...rows)
+                } else {
+                    data.customerData = rows;
+                    uni.stopPullDownRefresh();
+                    uni.pageScrollTo({
+                        scrollTop: 0,
+                        duration: 0,
+                    });
+                }
+            })
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* calc是css3中新增的计算属性, 它接收一个表达式做为参数 */
+        .parent { padding: 10px; border: #ddd solid 1px; font-size: 0; }
+        .child { display: inline-block; width: calc(50% - 2px); border: #ccc solid 1px; height: 200px; }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child"></div>
+        <div class="child"></div>
+    </div>
+</body>
+</html>
